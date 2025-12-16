@@ -1,0 +1,48 @@
+spring:
+  application:
+    name: SpringSearchAI
+  datasource:
+    url: jdbc:postgresql://localhost:5439/comp
+    username: myuser
+    password: secret
+    driver-class-name: org.postgresql.Driver
+    data:
+      mongodb:
+        host: localhost
+        port: 27017
+        database: product_read_db
+        username: user
+        password: password
+        authentication-database: admin
+        uri: mongodb://user:password@localhost:27017/product_read_db?authSource=admin
+
+    jpa:
+      hibernate:
+        ddl-auto: update
+
+  ai:
+    openai:
+      api-key: ${OPENAI_API_KEY}
+      chat:
+        options:
+          model: gpt-4
+    vectorstore:
+      pgvector:
+        initialize-schema: true
+
+
+  docker:
+    compose:
+      lifecycle-management: start_only
+
+logging:
+  level:
+    org:
+      apache:
+        pdfbox:
+          pdmodel:
+            font:
+              FileSystemFontProvider: ERROR
+
+server:
+  port: 8087
